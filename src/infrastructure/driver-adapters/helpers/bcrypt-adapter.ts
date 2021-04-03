@@ -8,11 +8,11 @@ export class BcryptAdapter implements IHash, IHashCompare {
     }
 
     async compare(text: string, digest: string): Promise<boolean> {
-        return  bcrypt.compareSync(text, digest)
+        return  bcrypt.compare(text, digest)
     }
 
    async hash(text: string): Promise<string> {
-        return bcrypt.hashSync(text, this.salt);
+        return bcrypt.hash(text, this.salt);
     }
 
 }

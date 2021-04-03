@@ -1,7 +1,9 @@
 import {LoadUserByIdController} from "../../../../src/infrastructure/entry-points/api/users/load-user-by-id-controller";
-import {MockLoadUserByIdRepositorySpy} from "../../../../tests/domain/mocks/mock-load-user-by-id-repository-spy";
-import {HttpRequest} from "../../../../src/infrastructure/helpers/http";
+import {MockLoadUserByIdServiceSpy} from "../../../domain/mocks/mock-load-user-by-id-service-spy";
+import {HttpRequest, serverError} from "../../../../src/infrastructure/helpers/http";
 import * as faker from 'faker'
+import {throwError} from "../../../../tests/domain/mocks/mock-error";
+import {ServerError} from "../../../../src/infrastructure/helpers/errors";
 
 const mockRequest = (): HttpRequest => {
     return {
@@ -11,11 +13,11 @@ const mockRequest = (): HttpRequest => {
 
 type SutTypes = {
     sut: LoadUserByIdController
-    mockLoadUserByIdServiceSpy: MockLoadUserByIdRepositorySpy
+    mockLoadUserByIdServiceSpy: MockLoadUserByIdServiceSpy
 }
 
 const makeSut = (): SutTypes => {
-    const mockLoadUserByIdServiceSpy = new MockLoadUserByIdRepositorySpy()
+    const mockLoadUserByIdServiceSpy = new MockLoadUserByIdServiceSpy()
     const sut = new LoadUserByIdController(mockLoadUserByIdServiceSpy)
 
     return {
