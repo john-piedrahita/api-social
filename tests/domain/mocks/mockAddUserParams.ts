@@ -5,7 +5,7 @@ export const mockAddUserParams = (): UserModel => ({
     id: faker.datatype.uuid(),
     name: faker.name.findName(),
     email: faker.internet.email(),
-    password: faker.random.word(),
+    password: faker.internet.password(),
     avatar: faker.internet.avatar(),
     date: faker.date.future()
 })
