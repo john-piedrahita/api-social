@@ -27,12 +27,18 @@ export const MongoHelper = {
 
     async loadCollectionByParam(value: string, param: string, collection: string): Promise<any> {
         let objectFilter = {}
-        objectFilter[param] = value === "string" ? value : new ObjectId(value)
+        objectFilter[param] = value
 
         const collectionResult = await MongoHelper.getCollection(collection)
         const result = await collectionResult.findOne(objectFilter)
-
         if (result) return result
+    },
+
+    async addCollection(value: any, collection: string): Promise<any> {
+        const collectionResult = await MongoHelper.getCollection(collection)
+        const result = await collectionResult.insertOne(value)
+
+        if (result) return result && MongoHelper.map(result)
     },
 
     map: (data: any): any => {
